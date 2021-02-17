@@ -1,0 +1,55 @@
+WRITTEN BY - KUNWAR YASHASWEE CHHAUNKER
+
+PROBLEM - 
+
+Given a m * n matrix of distinct numbers, return all lucky numbers in the matrix in any order.
+A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.
+Example 1:
+Input: matrix = [[3,7,8],[9,11,13],[15,16,17]]
+Output: [15]
+Explanation: 15 is the only lucky number since it is the minimum in its row and the maximum in its column
+Example 2:
+Input: matrix = [[1,10,4,2],[9,3,8,7],[15,16,17,12]]
+Output: [12]
+Explanation: 12 is the only lucky number since it is the minimum in its row and the maximum in its column.
+Example 3:
+Input: matrix = [[7,8],[1,2]]
+Output: [7]
+ 
+Constraints:
+m == mat.length
+n == mat[i].length
+1 <= n, m <= 50
+1 <= matrix[i][j] <= 10^5.
+All elements in the matrix are distinct.
+
+SOLUTION - 
+
+WRITTEN BY - KUNWAR YASHASWEE CHHAUNKER
+
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+          vector<int> res;        
+        int R = matrix.size();
+        if (R == 0) return {};
+        int C = matrix[0].size();
+        vector<int> rowMin(R, INT_MAX);
+        vector<int> colMax(C, -INT_MAX-1);
+        for (int r = 0; r < R; ++ r) {
+            for (int c = 0; c < C; ++ c) {
+                rowMin[r] = min(rowMin[r], matrix[r][c]);
+                colMax[c] = max(colMax[c], matrix[r][c]);
+            }
+        }
+        for (int r = 0; r < R; ++ r) {
+            for (int c = 0; c < C; ++ c) {
+                if (rowMin[r] == colMax[c]) {
+                    res.push_back(matrix[r][c]);
+                }
+            }
+        }
+        return res;
+    }
+    
+};
